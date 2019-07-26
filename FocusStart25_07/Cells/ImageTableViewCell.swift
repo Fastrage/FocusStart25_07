@@ -20,7 +20,6 @@ class ImageTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
         // Configure the view for the selected state
     }
     
@@ -73,7 +72,6 @@ class ImageTableViewCell: UITableViewCell {
                     cache.storeCachedResponse(cachedData, for: request)
                     DispatchQueue.main.async { [weak self] in
                         self?.myImage.image = image
-                        //                    self?.myImage.sizeToFit()
                         self?.activityIndicator.stopAnimating()
                     }
                 }

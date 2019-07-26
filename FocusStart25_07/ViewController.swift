@@ -20,7 +20,6 @@ class ViewController: UIViewController {
         self.tableView.delegate = self
         // Do any additional setup after loading the view.
     }
-    
 }
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -34,10 +33,7 @@ extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCellIdentifier", for: indexPath) as! ImageTableViewCell
-        
         cell.cellConfigure(url: urls[indexPath.row])
         return cell
     }
-    
-    
 }
