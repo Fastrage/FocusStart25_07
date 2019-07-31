@@ -14,10 +14,10 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBAction func addNewCat(_ sender: Any) {
-        addCatAllertController()
+        addNewCatAllertController()
     }
     
-   public var cat = Cats()
+    public var cat = Cats()
     var catUrlToPass = String()
     
     override func viewDidLoad() {
@@ -26,7 +26,56 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         self.tableView.delegate = self
     }
     
-    func addCatAllertController() {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "showDetail") {
+            let viewController = segue.destination as! DetailViewController
+            viewController.detailedCat = catUrlToPass
+        }
+    }
+}
+
+extension ViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 350
+    }
+}
+extension ViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.cat.urlOfCat.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCellIdentifier", for: indexPath) as! ImageTableViewCell
+        cell.catCellConfigure(url: cat.urlOfCat[indexPath.row])
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let currentCell = tableView.cellForRow(at: indexPath)! as! ImageTableViewCell
+        self.catUrlToPass = cat.urlOfCat[indexPath.row]
+        performSegue(withIdentifier: "showDetail", sender: self)
+    }
+}
+
+extension ViewController: UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let imageURl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
+            self.cat.urlOfCat.append(imageURl.absoluteString)
+            self.cat.descriptionOfCat.append("Этот котик загружен с Вашего устройства, у него пока нет описания :(")
+            picker.dismiss(animated: true, completion: nil)
+            self.tableView.beginUpdates()
+            self.tableView.insertRows(at: [
+                NSIndexPath(row: self.cat.urlOfCat.count-1, section: 0) as IndexPath], with: .automatic)
+            self.tableView.endUpdates()
+        } else {
+            //TODO: Use Photo from camera
+            picker.dismiss(animated: true, completion: nil)
+        }
+    }
+}
+
+extension ViewController {
+    func addNewCatAllertController() {
         let alertController = UIAlertController(title: "Добавить котика", message: nil, preferredStyle: .actionSheet)
         
         alertController.addAction(UIAlertAction(title: "Выбрать фото", style: UIAlertAction.Style.default, handler: { (UIAlertAction) in
@@ -104,52 +153,5 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         }
         alertController.addAction(createAction)
         present(alertController, animated: true, completion: nil)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "showDetail") {
-            let viewController = segue.destination as! DetailViewController
-            viewController.detailedCat = catUrlToPass
-        }
-    }
-}
-
-extension ViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 350
-    }
-}
-extension ViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.cat.urlOfCat.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCellIdentifier", for: indexPath) as! ImageTableViewCell
-        cell.catCellConfigure(url: cat.urlOfCat[indexPath.row])
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let currentCell = tableView.cellForRow(at: indexPath)! as! ImageTableViewCell
-        self.catUrlToPass = cat.urlOfCat[indexPath.row]
-        performSegue(withIdentifier: "showDetail", sender: self)
-    }
-}
-
-extension ViewController: UIImagePickerControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let imageURl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
-            self.cat.urlOfCat.append(imageURl.absoluteString)
-            self.cat.descriptionOfCat.append("Этот котик загружен с Вашего устройства, у него пока нет описания :(")
-            picker.dismiss(animated: true, completion: nil)
-            self.tableView.beginUpdates()
-            self.tableView.insertRows(at: [
-                NSIndexPath(row: self.cat.urlOfCat.count-1, section: 0) as IndexPath], with: .automatic)
-            self.tableView.endUpdates()
-        } else {
-            //TODO: Use Photo from camera
-            picker.dismiss(animated: true, completion: nil)
-        }
     }
 }
