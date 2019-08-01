@@ -29,28 +29,42 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="349.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IMG_2528" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oOa-4C-uwX">
-                                                    <rect key="frame" x="0.0" y="-0.5" width="414" height="350.5"/>
+                                                <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="vjz-rJ-SpA">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="350.5"/>
+                                                    <subviews>
+                                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Krt-dq-2PL">
+                                                            <rect key="frame" x="197" y="165.5" width="20" height="20"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        </activityIndicatorView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Error" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KnL-v1-V10">
+                                                            <rect key="frame" x="142" y="165" width="130" height="47"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oOa-4C-uwX">
+                                                            <rect key="frame" x="0.0" y="0.0" width="414" height="350.5"/>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="350" id="MYI-bi-esx"/>
+                                                        <constraint firstItem="oOa-4C-uwX" firstAttribute="centerY" secondItem="vjz-rJ-SpA" secondAttribute="centerY" id="2cU-wd-g3H"/>
+                                                        <constraint firstItem="oOa-4C-uwX" firstAttribute="width" secondItem="vjz-rJ-SpA" secondAttribute="width" id="PTG-Ue-E2A"/>
+                                                        <constraint firstItem="oOa-4C-uwX" firstAttribute="centerX" secondItem="vjz-rJ-SpA" secondAttribute="centerX" id="QsS-99-3XS"/>
+                                                        <constraint firstAttribute="height" constant="350" id="YyA-ms-02L"/>
+                                                        <constraint firstItem="oOa-4C-uwX" firstAttribute="height" secondItem="vjz-rJ-SpA" secondAttribute="height" id="iof-8e-YAs"/>
                                                     </constraints>
-                                                </imageView>
-                                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Krt-dq-2PL">
-                                                    <rect key="frame" x="197" y="165" width="20" height="20"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </activityIndicatorView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Error" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KnL-v1-V10">
-                                                    <rect key="frame" x="98" y="165" width="218" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="oOa-4C-uwX" firstAttribute="centerX" secondItem="ad9-DF-r5Z" secondAttribute="centerX" id="Poz-hi-bMA"/>
-                                                <constraint firstItem="oOa-4C-uwX" firstAttribute="width" secondItem="ad9-DF-r5Z" secondAttribute="width" id="hXb-ea-o6L"/>
-                                                <constraint firstItem="oOa-4C-uwX" firstAttribute="centerY" secondItem="ad9-DF-r5Z" secondAttribute="centerY" id="jKb-vq-ijL"/>
+                                                <constraint firstItem="vjz-rJ-SpA" firstAttribute="centerX" secondItem="ad9-DF-r5Z" secondAttribute="centerX" id="1Mq-zg-lNb"/>
+                                                <constraint firstItem="vjz-rJ-SpA" firstAttribute="centerY" secondItem="ad9-DF-r5Z" secondAttribute="centerY" id="4DB-V9-OgB"/>
+                                                <constraint firstItem="vjz-rJ-SpA" firstAttribute="top" secondItem="ad9-DF-r5Z" secondAttribute="top" id="6Eh-lo-ciU"/>
+                                                <constraint firstItem="vjz-rJ-SpA" firstAttribute="leading" secondItem="ad9-DF-r5Z" secondAttribute="leading" id="DHz-Ud-jFp"/>
+                                                <constraint firstAttribute="trailing" secondItem="vjz-rJ-SpA" secondAttribute="trailing" id="FPa-PF-YCP"/>
+                                                <constraint firstItem="vjz-rJ-SpA" firstAttribute="width" secondItem="ad9-DF-r5Z" secondAttribute="width" id="FdX-UN-pgx"/>
+                                                <constraint firstAttribute="bottom" secondItem="vjz-rJ-SpA" secondAttribute="bottom" id="ONj-NK-o9x"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -69,6 +83,8 @@
                             <constraint firstItem="CeS-LZ-FMG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="N7f-mg-mfy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="CeS-LZ-FMG" secondAttribute="trailing" id="Vfr-TV-eUt"/>
                             <constraint firstItem="CeS-LZ-FMG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="kka-iB-n92"/>
+                            <constraint firstItem="CeS-LZ-FMG" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" id="v3i-L7-3G9"/>
+                            <constraint firstItem="CeS-LZ-FMG" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" id="vQa-h9-GKe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -145,7 +161,4 @@
             <point key="canvasLocation" x="772.46376811594212" y="19.419642857142858"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="IMG_2528" width="2857" height="2041"/>
-    </resources>
 </document>

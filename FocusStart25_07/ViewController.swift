@@ -17,7 +17,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         addNewCatAllertController()
     }
     
-    public var cat = Cats()
+    public var cats = Cats()
     var catUrlToPass = String()
     
     override func viewDidLoad() {
@@ -30,6 +30,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate {
         if (segue.identifier == "showDetail") {
             let viewController = segue.destination as! DetailViewController
             viewController.detailedCat = catUrlToPass
+            viewController.cats = cats
         }
     }
 }
@@ -41,18 +42,17 @@ extension ViewController: UITableViewDelegate {
 }
 extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.cat.urlOfCat.count
+        return self.cats.urlOfCat.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCellIdentifier", for: indexPath) as! ImageTableViewCell
-        cell.catCellConfigure(url: cat.urlOfCat[indexPath.row])
+        cell.catCellConfigure(url: cats.urlOfCat[indexPath.row])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let currentCell = tableView.cellForRow(at: indexPath)! as! ImageTableViewCell
-        self.catUrlToPass = cat.urlOfCat[indexPath.row]
+        self.catUrlToPass = cats.urlOfCat[indexPath.row]
         performSegue(withIdentifier: "showDetail", sender: self)
     }
 }
@@ -60,12 +60,12 @@ extension ViewController: UITableViewDataSource {
 extension ViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let imageURl = info[UIImagePickerController.InfoKey.imageURL] as? URL {
-            self.cat.urlOfCat.append(imageURl.absoluteString)
-            self.cat.descriptionOfCat.append("Этот котик загружен с Вашего устройства, у него пока нет описания :(")
+            self.cats.urlOfCat.append(imageURl.absoluteString)
+            self.cats.descriptionOfCat.append("Этот котик загружен с Вашего устройства, у него пока нет описания :(")
             picker.dismiss(animated: true, completion: nil)
             self.tableView.beginUpdates()
             self.tableView.insertRows(at: [
-                NSIndexPath(row: self.cat.urlOfCat.count-1, section: 0) as IndexPath], with: .automatic)
+                NSIndexPath(row: self.cats.urlOfCat.count-1, section: 0) as IndexPath], with: .automatic)
             self.tableView.endUpdates()
         } else {
             //TODO: Use Photo from camera
@@ -145,10 +145,10 @@ extension ViewController {
                 return
             }
             self.tableView.beginUpdates()
-            self.cat.urlOfCat.append(urlOfCat)
-            self.cat.descriptionOfCat.append(desctOfCat)
+            self.cats.urlOfCat.append(urlOfCat)
+            self.cats.descriptionOfCat.append(desctOfCat)
             self.tableView.insertRows(at: [
-                NSIndexPath(row: self.cat.urlOfCat.count-1, section: 0) as IndexPath], with: .automatic)
+                NSIndexPath(row: self.cats.urlOfCat.count-1, section: 0) as IndexPath], with: .automatic)
             self.tableView.endUpdates()
         }
         alertController.addAction(createAction)

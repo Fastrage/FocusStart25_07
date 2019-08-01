@@ -36,7 +36,5 @@ class DetailViewController: UIViewController {
     
     func findDescriptionForCat(url: String) -> String {
         return cats.descriptionOfCat[cats.urlOfCat.firstIndex(of: url) ?? 0]
-
-        
     }
 }
